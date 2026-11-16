@@ -1,52 +1,115 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>검색</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수강신청 과목 카드</title>
+  <link rel="stylesheet" href="css/card.css">
 </head>
 <body>
-    <header>
-        <h1>검색 폼 연습</h1>
-    </header>
-    <hr>
-    <main>
-        <h2>내가 만든 검색 폼</h2>
-        <br>
-        <form
-        action="https://www.google.com/search"
-        method="get">
-            <label
-            for="q">구글
-        </label>
-        <input
-        type="text"
-        id="q"
-        name="q"
-        required>
-        <button
-        type="submit">
-            구글에서 검색
-        </button>
-        </form>
-    <br>
-    <form
-        action="https://ko.wikipedia.org/wiki"
-        method="get">
-            <label
-            for="a">위키백과
-        </label>
-        <input
-        type="text"
-        id="a"
-        name="search"
-        required>
-        <button
-        type="submit">
-            위키백과에서 검색
-        </button>
-        </form>
-        <br>
-    </main>
+  <h1>수강신청</h1>
+  
+  <p class="guide">담은 과목은 초록 테두리, 마감된 과목은 흐리게 보인다.</p>
+
+  <!-- 전체를 form으로 감싸고 target="_blank"를 주어 새 창(탭)으로 열리게 합니다 -->
+  <form action="https://httpbin.org/post" method="post" target="_blank">
+    <div class="course-list">
+      
+      <!-- 웹 프로그래밍 기초 (클릭 시 선택 토글 & 체크박스 연동) -->
+      <div class="course-card selected" id="web-card">
+        <input type="checkbox" name="courses" value="CS101-web" class="course-checkbox" checked>
+        <div class="course-name">웹 프로그래밍 기초 <span class="badge">필수</span></div>
+        <div class="course-info">CS101 · 3학점 · 월 1~2교시</div>
+        <div class="course-seat">정원 30 / 신청 12</div>
+      </div>
+
+      <!-- 데이터베이스 입문 (클릭 시 물결 효과 + 선택 토글 & 체크박스 연동) -->
+      <div class="course-card" id="db-card">
+        <input type="checkbox" name="courses" value="DB201-database" class="course-checkbox">
+        <div class="course-name">데이터베이스 입문</div>
+        <div class="course-info">DB201 · 3학점 · 화 3~4교시</div>
+        <div class="course-seat">정원 25 / 신청 20</div>
+      </div>
+
+      <!-- 자료구조 (마감) -->
+      <div class="course-card full">
+        <div class="course-name">자료구조 <span class="badge">마감</span></div>
+        <div class="course-info">CS103 · 2학점 · 수 1~2교시</div>
+        <div class="course-seat">정원 25 / 신청 25</div>
+      </div>
+
+    </div>
+
+    <!-- 신청하기 버튼 -->
+    <div style="margin: 20px 12px;">
+      <button type="submit" class="submit-btn">신청하기</button>
+    </div>
+  </form>
+
+  <!-- 스크립트 (카드 토글, 체크박스 연동, 리플 효과) -->
+  <script>
+    // 공통 함수: 카드 클릭 시 selected 클래스와 체크박스 상태 토글 및 리플 효과 발생
+    function setupCardToggle(cardId, event) {
+      const card = document.getElementById(cardId);
+      const checkbox = card.querySelector('.course-checkbox');
+      
+      // 1. 선택 상태 토글
+      card.classList.toggle('selected');
+      
+      // 2. 체크박스 checked 상태 토글
+      if (checkbox) {
+        checkbox.checked = card.classList.contains('selected');
+      }
+
+      // 3. 클릭 위치를 기준으로 리플(물결) 효과 생성
+      const rect = card.getBoundingClientRect();
+      const x = event.clientX - rect.left;
+      const y = event.clientY - rect.top;
+
+      const circle = document.createElement('span');
+      circle.classList.add('ripple');
+      circle.style.left = `${x}px`;
+      circle.style.top = `${y}px`;
+
+      const existingRipple = card.querySelector('.ripple');
+      if (existingRipple) {
+        existingRipple.remove();
+      }
+
+      card.appendChild(circle);
+    }
+
+    // 웹 프로그래밍 기초 카드 이벤트 연결
+    const webCard = document.getElementById('web-card');
+    webCard.addEventListener('click', function(e) {
+      setupCardToggle('web-card', e);
+    });
+
+    // 데이터베이스 입문 카드 이벤트 연결
+    const dbCard = document.getElementById('db-card');
+    dbCard.addEventListener('click', function(e) {
+      setupCardToggle('db-card', e);
+    });
+
+    // 신청하기 버튼 물결(Ripple) 퍼짐 효과
+    const submitBtn = document.querySelector('.submit-btn');
+    submitBtn.addEventListener('click', function (e) {
+      const rect = this.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+
+      const circle = document.createElement('span');
+      circle.classList.add('ripple');
+      circle.style.left = `${x}px`;
+      circle.style.top = `${y}px`;
+
+      const existingRipple = this.querySelector('.ripple');
+      if (existingRipple) {
+        existingRipple.remove();
+      }
+
+      this.appendChild(circle);
+    });
+  </script>
 </body>
 </html>

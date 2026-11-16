@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>수강신청 과목 카드</title>
+  <link rel="stylesheet" href="css/card.css">
+</head>
+<body>
+  <h1>수강신청</h1>
+  
+  <p class="guide">담은 과목은 초록 테두리, 마감된 과목은 흐리게 보인다.</p>
+
+  <!-- 전체를 form으로 감싸고 target="_blank"를 주어 새 창(탭)으로 열리게 합니다 -->
+  <form action="https://httpbin.org/post" method="post" target="_blank">
+    <div class="course-list">
+      
+      <!-- 1. 웹 프로그래밍 기초 (기본 선택된 상태: checked) -->
+      <label class="course-card">
+        <input type="checkbox" name="courses" value="CS101" class="course-checkbox" checked>
+        <div class="course-name">웹 프로그래밍 기초 <span class="badge">필수</span></div>
+        <div class="course-info">CS101 · 3학점 · 월 1~2교시</div>
+        <div class="course-seat">정원 30 / 신청 12</div>
+      </label>
+
+      <!-- 2. 데이터베이스 입문 (클릭하면 체크되며 초록색으로 바뀜) -->
+      <label class="course-card">
+        <input type="checkbox" name="courses" value="DB201" class="course-checkbox">
+        <div class="course-name">데이터베이스 입문</div>
+        <div class="course-info">DB201 · 3학점 · 화 3~4교시</div>
+        <div class="course-seat">정원 25 / 신청 20</div>
+      </label>
+
+      <!-- 3. 자료구조 (마감: 체크박스에 disabled 부여) -->
+      <label class="course-card full">
+        <input type="checkbox" name="courses" value="CS103" class="course-checkbox" disabled>
+        <div class="course-name">자료구조 <span class="badge">마감</span></div>
+        <div class="course-info">CS103 · 2학점 · 수 1~2교시</div>
+        <div class="course-seat">정원 25 / 신청 25</div>
+      </label>
+
+    </div>
+
+    <!-- 신청하기 버튼 -->
+    <div style="margin: 20px 12px;">
+      <button type="submit" class="submit-btn">신청하기</button>
+    </div>
+  </form>
+
+</body>
+</html>

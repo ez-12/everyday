@@ -1,0 +1,95 @@
+body {
+   color: #333;
+}
+
+.guide {
+   color: #424040;
+}
+
+/* 기본 과목 카드 스타일 (label을 block으로 지정) */
+.course-card {
+   display: block;
+   position: relative;
+   overflow: hidden;
+   background: rgb(250, 248, 248);
+   border: 1px solid #ccc;
+   max-width: 500px;
+   margin: 12px;
+   text-align: left;
+   padding: 12px;
+   color: #000;
+   cursor: pointer;
+   transition: all 0.2s ease;
+}
+
+/* 💡 체크박스를 숨기되 클릭이 가능하도록 투명하게 처리 (display: none 제거) */
+.course-checkbox {
+   position: absolute;
+   opacity: 0;
+   width: 0;
+   height: 0;
+}
+
+/* 뱃지 기본 스타일 */
+.badge {
+   background: green;
+   border: 1px solid #111;
+   margin: 2px;
+   color: white;
+   font-size: 0.95rem;
+   font-weight: 700;
+   padding: 0px 8px;
+}
+
+.course-card .course-name {
+   color: #000;
+   font-size: 1.5rem;
+   font-weight: 700;
+}
+
+/* 💡 핵심: 체크박스가 체크되었을 때 카드 색상 변경 (최신 브라우저 기준 :has 사용) */
+.course-card:has(.course-checkbox:checked) {
+   background: rgba(165, 255, 165, 0.87);
+   border: 2px solid #2e8b57;
+}
+
+/* 자료구조 등 마감된 과목 */
+.course-card.full {
+   background: #dcdcdc;
+   border: 1px solid #adadad;
+   color: #555;
+   cursor: not-allowed;
+}
+
+.course-card.full .course-name {
+   color: #444;
+}
+
+.course-card.full .course-info,
+.course-card.full .course-seat {
+   color: #666;
+}
+
+.course-card.full .badge {
+   background: #777;
+   border-color: #555;
+}
+
+/* 신청하기 버튼 스타일 */
+.submit-btn {
+   position: relative;
+   overflow: hidden;
+   background-color: #2e8b57;
+   color: white;
+   border: none;
+   padding: 10px 20px;
+   font-size: 1.1rem;
+   font-weight: 700;
+   cursor: pointer;
+   border-radius: 4px;
+   transition: background-color 0.2s;
+}
+
+.submit-btn:hover {
+   background-color: #246b43;
+}
