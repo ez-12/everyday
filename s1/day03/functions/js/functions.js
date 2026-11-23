@@ -46,3 +46,38 @@ const y = getSum(1, 2);
 console.log(x);
 console.log(y);
 //
+function sumCredits(credits)
+{
+  let total = 0;
+  for (let i = 0; i < credits.length; i++)
+  {
+    total = total + credits[i];
+  }
+  return total;
+}
+
+console.log(sumCredits([3, 3, 2]));
+console.log(sumCredits([3, 3, 2, 3, 3, 2, 3]))
+
+const myCredits = [3, 3, 2];
+console.log(sumCredits(myCredits));
+//
+function checkCredit(total)
+{
+  if (total > 18)
+  {
+    return "학점 초과";
+  }
+  return "신청 가능"
+}
+
+console.log(checkCredit(sumCredits([3, 3, 2])));
+console.log(checkCredit(19));
+//
+function showTotal()
+{
+  console.log("합계 : " + sumCredits([3, 3, 2]));
+}
+
+const btn = document.querySelector("#btn");
+btn.addEventListener("click", showTotal);
