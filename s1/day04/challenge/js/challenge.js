@@ -60,7 +60,7 @@ console.log(addCount());
 console.log(addCount());
 console.log(addCount());
 //
-maxPrice = (prices) =>
+const maxPrice = (prices) =>
 {
     let i = prices[0];
     for (let j = 0; j < prices.length; j++)
